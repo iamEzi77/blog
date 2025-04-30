@@ -1,0 +1,18 @@
+<% layout('layouts/layout') -%>
+
+<div class="post-grid">
+  <% posts.forEach(post => { %>
+  <article class="post-card">
+    <h2 class="post-title"><%= post.title %></h2>
+    <p class="post-meta">By <%= post.author %></p>
+    <p class="post-content"><%= post.content.substring(0, 100) %>...</p>
+    <div class="post-actions">
+      <a href="/posts/<%= post.id %>">Read More</a>
+      <a href="/posts/<%= post.id %>/edit">Edit</a>
+      <form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  </article>
+  <% }); %>
+</div>

@@ -1,0 +1,32 @@
+<% layout('layouts/layout') -%> <% title = 'All Posts' -%>
+
+<section class="posts-section">
+  <h1 class="page-title">All Posts</h1>
+
+  <% if (posts.length === 0) { %>
+  <div class="no-posts">
+    <p>No posts found. Create your first post!</p>
+    <a href="/posts/new" class="btn">Create Post</a>
+  </div>
+  <% } else { %>
+  <div class="posts-grid">
+    <% posts.forEach(post => { %>
+    <article class="post-card">
+      <h2 class="post-title"><%= post.title %></h2>
+      <div class="post-meta">
+        <span class="author">By <%= post.author %></span>
+        <time class="date"><%= post.createdAt.toDateString() %></time>
+      </div>
+      <p class="post-excerpt"><%= post.content.substring(0, 100) %>...</p>
+      <div class="post-actions">
+        <a href="/posts/<%= post.id %>" class="btn read-more">Read More</a>
+        <a href="/posts/<%= post.id %>/edit" class="btn edit">Edit</a>
+        <form action="/posts/<%= post.id %>/delete" method="POST">
+          <button type="submit" class="btn delete">Delete</button>
+        </form>
+      </div>
+    </article>
+    <% }); %>
+  </div>
+  <% } %>
+</section>
